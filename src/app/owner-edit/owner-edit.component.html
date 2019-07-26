@@ -14,19 +14,15 @@
                 <input matInput placeholder="Owner DNI" [(ngModel)]="owner.dni" required name="dni" #name>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Owner profession" [(ngModel)]="owner.profession" required name="profession" #name>
+                <input matInput placeholder="Owner profession" [(ngModel)]="owner.profession" required name="profession"
+                    #name>
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary" type="submit" [disabled]="!ownerForm.form.valid">Save</button>
-            <button mat-raised-button color="secondary" (click)="remove(owner.href)"
-                    *ngIf="owner.href" type="button">Delete</button>
+            <button mat-raised-button color="secondary" (click)="remove(owner.href)" *ngIf="owner.href"
+                type="button">Delete</button>
             <a mat-button routerLink="/car-list">Cancel</a>
         </mat-card-actions>
-        <!-- <mat-card-footer>
-            <div class="giphy">
-                <img src="{{car.giphyUrl}}" alt="{{owner.name}}">
-            </div>
-        </mat-card-footer> -->
     </form>
 </mat-card>

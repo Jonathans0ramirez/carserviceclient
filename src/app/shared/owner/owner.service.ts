@@ -16,7 +16,7 @@ export class OwnerService {
   }
 
   get(id: string) {
-    return this.http.get(this.OWNER_API + '/' + id);
+    return this.http.get(id);
   }
 
   save(owner: any): Observable<any> {

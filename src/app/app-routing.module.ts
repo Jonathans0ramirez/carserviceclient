@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'car-edit/:id',
     component: CarEditComponent
+  },
+  {
+    path: 'owner-edit/:id',
+    component: OwnerEditComponent
   }
 ];
 

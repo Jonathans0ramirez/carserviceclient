@@ -1,34 +1,35 @@
 <mat-grid-list cols="3">
-        <mat-card-title>Owner List
-          <button mat-fab color="primary" [routerLink]="['/car-add']">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-fab color="accent" [routerLink]="['/car-list']">
-                <mat-icon>list</mat-icon>
-              </button>
-        </mat-card-title>
-        <mat-card-title>Owner List
-            <button mat-fab color="accent" [routerLink]="['/owner-add']">
-                <mat-icon>add</mat-icon>
-              </button>
-          </mat-card-title>
-        <mat-grid-tile *ngFor="let owner of owners">
-          <mat-card class="card">
+    <mat-card-title>Owner List
+        <button mat-mini-fab color="primary" [routerLink]="['/car-add']">
+            <mat-icon>add</mat-icon>
+        </button>
+        <button mat-mini-fab color="accent" [routerLink]="['/car-list']">
+            <mat-icon>list</mat-icon>
+        </button>
+    </mat-card-title>
+    <mat-card-title>Owner List
+        <button mat-mini-fab color="accent" [routerLink]="['/owner-add']">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-card-title>
+    <mat-grid-tile *ngFor="let owner of owners">
+        <mat-card class="card">
             <mat-card-header>
-              <div mat-card-avatar class="header-image">
-                <mat-icon mat-list-icon>sentiment_very_satisfied</mat-icon>
-              </div>
-              <mat-card-title>{{owner.name}}</mat-card-title>
-              <mat-card-subtitle>{{owner.dni}}</mat-card-subtitle>
-              <mat-card-subtitle>{{owner.profession}}</mat-card-subtitle>
-            </mat-card-header>            
+                <div mat-card-avatar class="header-image">
+                    <mat-icon mat-list-icon>sentiment_very_satisfied</mat-icon>
+                </div>
+                <mat-card-title>{{owner.name}}</mat-card-title>
+                <mat-card-subtitle>{{owner.dni}}</mat-card-subtitle>
+                <mat-card-subtitle>{{owner.profession}}</mat-card-subtitle>
+            </mat-card-header>
             <mat-card-content>
-      
+
             </mat-card-content>
             <mat-card-actions>
-              <button mat-stroked-button color="primary" [routerLink]="['/owner-edit', owner.id]">Editar</button>
-              <button mat-stroked-button color="primary" (click)="remove(owner._links.self.href)">Eliminar</button>
+                <button mat-stroked-button color="primary"
+                    [routerLink]="['/owner-edit', owner._links.self.href]">Editar</button>
+                <button mat-stroked-button color="primary" (click)="remove(owner._links.self.href)">Eliminar</button>
             </mat-card-actions>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
