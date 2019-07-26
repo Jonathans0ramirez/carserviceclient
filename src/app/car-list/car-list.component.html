@@ -1,26 +1,17 @@
-<!-- <mat-card>
-  <mat-card-title>Car List</mat-card-title>
-  <button mat-fab color="primary" [routerLink]="['/car-add']">Add</button>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let car of cars">
-        <img mat-list-avatar src="{{car.giphyUrl}}" alt="{{car.name}}">
-        <h3 mat-line>
-          <a mat-button [routerLink]="['/car-edit', car.id]">{{car.name}}</a>
-        </h3>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-
-</mat-card> -->
-
-
 <mat-grid-list cols="3">
   <mat-card-title>Car List
     <button mat-fab color="primary" [routerLink]="['/car-add']">
         <mat-icon>add</mat-icon>
       </button>
   </mat-card-title>
+  <mat-card-title>Owner List
+      <button mat-fab color="accent" [routerLink]="['/owner-add']">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-fab color="accent" [routerLink]="['/owner-list']">
+          <mat-icon>list</mat-icon>
+        </button>
+    </mat-card-title>
   <mat-grid-tile *ngFor="let car of cars">
     <mat-card class="card">
       <mat-card-header>
