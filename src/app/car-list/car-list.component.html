@@ -14,22 +14,30 @@
 
 </mat-card> -->
 
-<mat-card-title>Car List
-<button mat-fab color="primary" [routerLink]="['/car-add']">Add</button>
-</mat-card-title>
-<mat-card class="card" *ngFor="let car of cars">
-    <mat-card-header>
-      <div mat-card-avatar class="header-image"></div>
-      <mat-card-title>{{car.name}}</mat-card-title>
-      <mat-card-subtitle>{{car.ownerDni}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="{{car.giphyUrl}}" alt="{{car.name}}">
-    <mat-card-content>
-      
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button [routerLink]="['/car-edit', car.id]">Editar</button>
-      <button mat-button>Eliminar</button>
-    </mat-card-actions>
-  </mat-card>
-  
+
+<mat-grid-list cols="3">
+  <mat-card-title>Car List
+    <button mat-fab color="primary" [routerLink]="['/car-add']">
+        <mat-icon>add</mat-icon>
+      </button>
+  </mat-card-title>
+  <mat-grid-tile *ngFor="let car of cars">
+    <mat-card class="card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image">
+          <mat-icon mat-list-icon>drive_eta</mat-icon>
+        </div>
+        <mat-card-title>{{car.name}}</mat-card-title>
+        <mat-card-subtitle>{{car.ownerDni}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{car.giphyUrl}}" alt="{{car.name}}" width="432" height="275" style="margin-bottom: 0px">
+      <mat-card-content>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" [routerLink]="['/car-edit', car.id]">Editar</button>
+        <button mat-stroked-button color="primary" (click)="remove(car.id)">Eliminar</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

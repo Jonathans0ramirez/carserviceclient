@@ -10,7 +10,8 @@
                  required name="name" #name>
         </mat-form-field>
         <mat-form-field>
-          <mat-select placeholder="Select" [(ngModel)]="car.ownerDni" required name="ownerDni" #ownerDni>
+          <mat-select placeholder="Select" [(ngModel)]="car.ownerDni" name="ownerDni" #ownerDni>
+              <mat-option>--</mat-option>
             <mat-option *ngFor="let owner of owners" [value]="owner.dni">{{owner.name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -18,8 +19,8 @@
       <mat-card-actions>
         <button mat-raised-button color="primary" type="submit"
                 [disabled]="!carForm.form.valid">Save</button>
-        <button mat-raised-button color="secondary" (click)="remove(car.href)"
-                *ngIf="car.href" type="button">Delete</button>
+        <!-- <button mat-raised-button color="secondary" (click)="remove(car.href)"
+                *ngIf="car.href" type="button">Delete</button> -->
         <a mat-button routerLink="/car-list">Cancel</a>
       </mat-card-actions>
       <mat-card-footer>

@@ -9,6 +9,7 @@ import { GiphyService } from '../shared/giphy/giphy.service';
 })
 export class CarListComponent implements OnInit {
   cars: Array<any>;
+  car: any = {};
 
   constructor(private carService: CarService, private giphyService: GiphyService) { }
 
@@ -16,9 +17,22 @@ export class CarListComponent implements OnInit {
     this.carService.getAll().subscribe(data => {
       this.cars = data;
       for (const car of this.cars) {
-        if(!car.ownerDni){car.ownerDni = "No Owner";}
+        if(!car.ownerDni){car.ownerDni = "No Owner";}        
         this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
       }
     });
   }
+
+  remove(id) {
+    this.carService.get(id).subscribe((car: any) => {
+      if (car) {
+        this.car = car;            
+        var href = car._links.self.href;          
+      }
+    
+    this.carService.remove(href).subscribe(result => {
+      this.ngOnInit();
+    }, error => console.error(error));
+  }, error => console.error(error));
+}
 }
