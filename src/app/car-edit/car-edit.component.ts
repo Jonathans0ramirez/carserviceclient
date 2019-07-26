@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../shared/car/car.service';
+import { OwnerService } from '../shared/owner/owner.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
 import { NgForm } from '@angular/forms';
 
@@ -12,16 +13,19 @@ import { NgForm } from '@angular/forms';
 })
 export class CarEditComponent implements OnInit, OnDestroy {
   car: any = {};
+  owners: any = [];
 
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private carService: CarService,
+              private ownerService: OwnerService,
               private giphyService: GiphyService) {
   }
 
   ngOnInit() {
+    this.getOwners();
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
@@ -45,6 +49,12 @@ export class CarEditComponent implements OnInit, OnDestroy {
 
   gotoList() {
     this.router.navigate(['/car-list']);
+  }
+
+  getOwners(){
+    this.ownerService.getAll().subscribe(owners => {
+      this.owners = owners['_embedded']['owners'];      
+    });
   }
 
   save(form: NgForm) {
