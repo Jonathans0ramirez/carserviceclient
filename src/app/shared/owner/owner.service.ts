@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Observable } from 'rxjs';
 export class OwnerService {
   public API = '//thawing-chamber-47973.herokuapp.com';
   public OWNER_API = this.API + '/owners';
+  public FINDOWNERDNI_API = this.OWNER_API + 'search/findByDni?dni=';
 
   constructor(private http: HttpClient) {
   }
@@ -15,8 +17,19 @@ export class OwnerService {
     return this.http.get(this.OWNER_API);
   }
 
-  get(id: string) {
+  get(id: string) {    
     return this.http.get(id);
+  }
+
+  hasOwner(dni:string) {
+    const apiLink = this.FINDOWNERDNI_API + dni;
+    return this.http.get(apiLink).pipe(map((response: any) => {
+      if (response.data.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }));
   }
 
   save(owner: any): Observable<any> {
@@ -34,3 +47,4 @@ export class OwnerService {
   }
 }
 
+// https://thawing-chamber-47973.herokuapp.com/owners/search/findByDni?dni="+ 1037582890
