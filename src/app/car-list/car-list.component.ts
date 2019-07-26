@@ -16,6 +16,7 @@ export class CarListComponent implements OnInit {
     this.carService.getAll().subscribe(data => {
       this.cars = data;
       for (const car of this.cars) {
+        if(!car.ownerDni){car.ownerDni = "No Owner";}
         this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
       }
     });
