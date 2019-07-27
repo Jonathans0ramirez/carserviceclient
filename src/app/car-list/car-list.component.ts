@@ -11,6 +11,7 @@ import { GiphyService } from '../shared/giphy/giphy.service';
 export class CarListComponent implements OnInit {
   cars: Array<any>;
   car: any = {};
+  owner: Array<any>;
 
   constructor(private carService: CarService, private ownerService: OwnerService, private giphyService: GiphyService) { }
 
@@ -21,13 +22,15 @@ export class CarListComponent implements OnInit {
         if(!car.ownerDni){
           car.ownerDniChar = "No Owner";
         } else{
-          this.ownerService.hasOwner(car.ownerDni).subscribe(bin => {
-            if(!bin){
-              car.ownerDni = null;
-              console.log("SII");
-              car.ownerDniChar = "No Owner";
-            } else {
+          this.ownerService.getOwner(car.ownerDni).subscribe(data => {
+            this.owner = data['_embedded']['owners']
+            if (this.owner && this.owner.length > 0) {              
               car.ownerDniChar = car.ownerDni;
+              console.log(`Owner with DNI '${car.ownerDni}' found`);
+            } else {
+              car.ownerDni = null;
+              console.log(`Owner with DNI '${car.ownerDni}' not found, returning to list`);             
+              car.ownerDniChar = "No Owner";
             }
           });
         }
