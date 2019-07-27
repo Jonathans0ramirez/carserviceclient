@@ -24,5 +24,3 @@ export class OwnerListComponent implements OnInit {
     }, error => console.error(error));
   }
 }
-
-// "https://thawing-chamber-47973.herokuapp.com/owners/search/findByDni?dni="+ 1037582890

@@ -1,0 +1,12 @@
+.mat-toolbar.mat-primary{
+    background: #f9a825;
+    color: #fff;
+}
+
+.example-icon {
+    padding: 0 14px;
+}
+  
+.example-spacer {
+    flex: 1 1 auto;
+}

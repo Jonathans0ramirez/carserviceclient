@@ -1,5 +1,20 @@
-<mat-toolbar color="primary">
-  <span>Welcome to {{title}}!</span>
-</mat-toolbar>
-
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">  
+  <mat-toolbar-row>
+    <span>Welcome to {{title}}!</span>
+    <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="carMenu"><mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">drive_eta</mat-icon>Car</button>
+    <button mat-button [matMenuTriggerFor]="ownerMenu"><mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">person</mat-icon>Owner</button>
+  </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-menu #carMenu="matMenu">
+    <button mat-menu-item [routerLink]="['/car-list']" *ngIf="router.url != '/car-list'"><mat-icon>list</mat-icon>Car List</button>
+    <button mat-menu-item [routerLink]="['/car-add']" *ngIf="router.url != '/car-add'"><mat-icon>add</mat-icon>Add Car</button>
+  </mat-menu>
+  
+  <mat-menu #ownerMenu="matMenu">
+    <button mat-menu-item [routerLink]="['/owner-list']" *ngIf="router.url != '/owner-list'"><mat-icon>list</mat-icon>Owner List</button>
+    <button mat-menu-item [routerLink]="['/owner-add']" *ngIf="router.url != '/owner-add'"><mat-icon>add</mat-icon>Add Owner</button>
+  </mat-menu>
+  
+  <router-outlet></router-outlet>
+  

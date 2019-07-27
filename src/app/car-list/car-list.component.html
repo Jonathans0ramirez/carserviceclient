@@ -1,17 +1,4 @@
 <mat-grid-list cols="3">
-  <mat-card-title>Car List
-    <button mat-mini-fab color="primary" [routerLink]="['/car-add']">
-        <mat-icon>add</mat-icon>
-      </button>
-  </mat-card-title>
-  <mat-card-title>Owner List
-      <button mat-mini-fab color="accent" [routerLink]="['/owner-add']">
-          <mat-icon>add</mat-icon>
-        </button>
-        <button mat-mini-fab color="accent" [routerLink]="['/owner-list']">
-          <mat-icon>list</mat-icon>
-        </button>
-    </mat-card-title>
   <mat-grid-tile *ngFor="let car of cars">
     <mat-card class="card">
       <mat-card-header>
@@ -26,8 +13,8 @@
 
       </mat-card-content>
       <mat-card-actions>
-        <button mat-stroked-button color="primary" [routerLink]="['/car-edit', car.id]">Editar</button>
-        <button mat-stroked-button color="primary" (click)="remove(car.id)">Eliminar</button>
+        <button mat-stroked-button color="warn" [routerLink]="['/car-edit', car.id]">Editar</button>
+        <button mat-stroked-button color="warn" (click)="remove(car.id)">Eliminar</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
