@@ -28,8 +28,8 @@ export class CarListComponent implements OnInit {
               car.ownerDniChar = car.ownerDni;
               console.log(`Owner with DNI '${car.ownerDni}' found`);
             } else {
-              car.ownerDni = null;
               console.log(`Owner with DNI '${car.ownerDni}' not found, returning to list`);             
+              car.ownerDni = null;
               car.ownerDniChar = "No Owner";
               this.carService.save(car).subscribe(result => {console.log(`Link with owner removed`); }, error => console.error(error));
             }

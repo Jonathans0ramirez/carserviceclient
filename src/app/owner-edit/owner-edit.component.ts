@@ -29,8 +29,8 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
             this.owner = owner;            
             this.owner.href = owner._links.self.href;
           } else {
-            console.log(`Owner with id '${id}' not found, returning to list`);
-            this.gotoList();
+            console.log(`Owner with id '${id}' not found, returning to owner list`);
+            this.gotoOwnerList();
           }
         });
       }
@@ -41,20 +41,20 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  gotoList() {
-    this.router.navigate(['/car-list']);
+  gotoOwnerList() {
+    this.router.navigate(['/owner-list']);
   }
 
 
   save(form: NgForm) {
     this.ownerService.save(form).subscribe(result => {
-      this.gotoList();
+      this.gotoOwnerList();
     }, error => console.error(error));
   }
 
   remove(href) {
     this.ownerService.remove(href).subscribe(result => {
-      this.gotoList();
+      this.gotoOwnerList();
     }, error => console.error(error));
   }
 
