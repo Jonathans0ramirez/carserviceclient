@@ -60,6 +60,7 @@ Edit Car | Edit Owner
 ***Here we can also attach an owner to a car***
 
 >**See how owner is attached to Mustang GT**
+
 ![CarListWithOwner](https://user-images.githubusercontent.com/42523266/62013263-8bf5f780-b155-11e9-8338-add9a38caef6.png)
 
 ### :x: Delete Section
@@ -67,9 +68,11 @@ Edit Car | Edit Owner
 ![DeleteOwner](https://user-images.githubusercontent.com/42523266/62013265-8c8e8e00-b155-11e9-828f-7a399861242d.PNG)
 
 >**NOTE:** *If an owner is deleted from owners list. Each link with his cars is removed.*
+
 ![CarListWithoutOwner](https://user-images.githubusercontent.com/42523266/62013262-8bf5f780-b155-11e9-88e2-6c93a79ce464.png)
 
 #### • Delete a car
 ![DeleteCar](https://user-images.githubusercontent.com/42523266/62013264-8c8e8e00-b155-11e9-9aaf-fe33ea7818f3.PNG)
-<*After delete the car*
+>*After delete the car*
+
 ![CarListAfter](https://user-images.githubusercontent.com/42523266/62013261-8b5d6100-b155-11e9-8e32-289d61f2925a.PNG)
