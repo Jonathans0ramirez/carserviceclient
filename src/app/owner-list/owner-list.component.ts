@@ -35,9 +35,14 @@ export class OwnerListComponent implements OnInit {
         this.remove(ownerAux._links.self.href);
       }
     });
-  }  
+  } 
 
-  changeEvent() {
+  changeSlideEvent() {
+    this.owners.forEach(owner => owner.check = false);
+    this.checkedBool= true;
+  } 
+
+  changeCheckBoxEvent() {
     (this.owners.some(owner => owner.check) ? this.checkedBool= false : this.checkedBool= true); 
   }
 }

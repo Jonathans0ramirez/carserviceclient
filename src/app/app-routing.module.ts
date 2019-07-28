@@ -28,7 +28,7 @@ const routes: Routes = [
     component: CarEditComponent
   },
   {
-    path: 'owner-edit/:id',
+    path: 'owner-edit/:href',
     component: OwnerEditComponent
   }
 ];

@@ -1,6 +1,6 @@
 <mat-grid-list cols="3">
     <mat-card-title>
-        <mat-slide-toggle class="margin" [color]="warn" [(ngModel)]="checked">
+        <mat-slide-toggle class="margin" [color]="warn" [(ngModel)]="checked" (change)="changeSlideEvent($event)">
             Slide to {{checked ? 'cancel selection' : 'select which ones to delete'}}
         </mat-slide-toggle>
     </mat-card-title>
@@ -16,7 +16,7 @@
                 <mat-card-title>{{owner.name}}</mat-card-title>
                 <mat-card-subtitle>{{owner.dni}}</mat-card-subtitle>
                 <mat-card-subtitle>{{owner.profession}}</mat-card-subtitle>
-                <div><mat-checkbox [(ngModel)]="owner.check" *ngIf="checked" (change)="changeEvent($event)"></mat-checkbox></div>
+                <div><mat-checkbox [(ngModel)]="owner.check" *ngIf="checked" (change)="changeCheckBoxEvent($event)"></mat-checkbox></div>
             </mat-card-header>
             <mat-card-actions>
                 <button mat-stroked-button color="warn" [routerLink]="['/owner-edit', owner._links.self.href]">Edit</button>

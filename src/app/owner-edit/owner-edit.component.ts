@@ -22,14 +22,14 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.ownerService.get(id).subscribe((owner: any) => {
+      const href = params['href'];
+      if (href) {
+        this.ownerService.get(href).subscribe((owner: any) => {
           if (owner) {
             this.owner = owner;            
             this.owner.href = owner._links.self.href;
           } else {
-            console.log(`Owner with id '${id}' not found, returning to owner list`);
+            console.log(`Owner with href '${href}' not found, returning to owner list`);
             this.gotoOwnerList();
           }
         });
