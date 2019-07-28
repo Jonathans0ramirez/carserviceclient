@@ -1,11 +1,11 @@
 <mat-grid-list cols="3">
     <mat-card-title>
         <mat-slide-toggle class="margin" [color]="warn" [(ngModel)]="checked">
-            Slide to {{checked ? 'cancel selection' : 'select which remove'}}
+            Slide to {{checked ? 'cancel selection' : 'select which ones to delete'}}
         </mat-slide-toggle>
     </mat-card-title>
     <mat-card-title>
-        <button mat-stroked-button color="warn" (click)="removeSelected($event)" *ngIf="checked" [disabled]="checkedBool">Remove Selection</button>
+        <button mat-stroked-button color="warn" (click)="removeSelected($event)" *ngIf="checked" [disabled]="checkedBool">Delete Selection</button>
     </mat-card-title>
     <mat-grid-tile *ngFor="let owner of owners">
         <mat-card class="card">
@@ -19,8 +19,8 @@
                 <div><mat-checkbox [(ngModel)]="owner.check" *ngIf="checked" (change)="changeEvent($event)"></mat-checkbox></div>
             </mat-card-header>
             <mat-card-actions>
-                <button mat-stroked-button color="warn" [routerLink]="['/owner-edit', owner._links.self.href]">Editar</button>
-                <button mat-stroked-button color="warn" (click)="remove(owner._links.self.href)">Eliminar</button>
+                <button mat-stroked-button color="warn" [routerLink]="['/owner-edit', owner._links.self.href]">Edit</button>
+                <!-- <button mat-stroked-button color="warn" (click)="remove(owner._links.self.href)">Eliminar</button> -->
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>
