@@ -1,12 +1,12 @@
 <mat-grid-list cols="3">
-    <mat-car-title>
+    <mat-card-title>
         <mat-slide-toggle class="margin" [color]="warn" [(ngModel)]="checked">
             Slide to {{checked ? 'cancel selection' : 'select which remove'}}
         </mat-slide-toggle>
-    </mat-car-title>
-    <mat-car-title>
+    </mat-card-title>
+    <mat-card-title>
         <button mat-stroked-button color="warn" (click)="removeSelected($event)" *ngIf="checked" [disabled]="checkedBool">Remove Selection</button>
-    </mat-car-title>
+    </mat-card-title>
     <mat-grid-tile *ngFor="let owner of owners">
         <mat-card class="card">
             <mat-card-header>
