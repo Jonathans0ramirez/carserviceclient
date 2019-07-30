@@ -28,21 +28,141 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## :open_file_folder: Documentation
 
+Components and services added or changed after fork.
+
 ## app-module
+
+Here was defined all the components what were used in the project from angular material. 
+* MatCheckBoxModule
+* MatIconModule
+* MatMenuModule
+* MatSelectModule
+* MatSlideToogleModule
+* MatGridListModule
+
+ ```import { MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatToolbarModule, MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatGridListModule } from '@angular/material';```
 
 ## main.ts
 
+Import `HammerJs` for the correct operation of some menus.
+
 ## app-component
+
+The toolbar has been modified to be more friendly with user. Changing the primary color and adding two menus for owner and car. In each one there are two options, list and add. To switch between those components was necessary to import the library package `Router` from `@angular/router`
+
+  ```import { Router } from 'node_modules/@angular/router';```
+  
+>**Toolbar**
+
+        <mat-toolbar color="primary">  
+          <span>Welcome to {{title}}!</span>
+          <mat-toolbar-row>
+        </mat-toolbar>
+            <span>Welcome to {{title}}!</span>
+            <span class="example-spacer"></span>
+        <router-outlet></router-outlet>
+            <button mat-button [matMenuTriggerFor]="carMenu"><mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">drive_eta</mat-icon>Car</button>
+            <button mat-button [matMenuTriggerFor]="ownerMenu"><mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">person</mat-icon>Owner</button>
+          </mat-toolbar-row>
+          </mat-toolbar>
+          <mat-menu #carMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/car-list']" *ngIf="router.url != '/car-list'"><mat-icon>list</mat-icon>Car List</button>
+            <button mat-menu-item [routerLink]="['/car-add']" *ngIf="router.url != '/car-add'"><mat-icon>add</mat-icon>Add Car</button>
+          </mat-menu>
+          <mat-menu #ownerMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/owner-list']" *ngIf="router.url != '/owner-list'"><mat-icon>list</mat-icon>Owner List</button>
+            <button mat-menu-item [routerLink]="['/owner-add']" *ngIf="router.url != '/owner-add'"><mat-icon>add</mat-icon>Add Owner</button>
+          </mat-menu>
 
 ## ownerService
 
+A function was created to get the owner with a DNI parameter.
+
+     getOwner(dni:string) {
+      const apiLink = this.FINDOWNERDNI_API + dni;
+      return this.http.get(apiLink);
+    }
+
 ## car-list
+
+The way to list was changed from list to card. The edit and delete buttons were also changed. When this component init, a query is made with each car to verify if there is an car-owner relationship.
+
+          this.ownerService.getOwner(car.ownerDni).subscribe(data => {
+            this.owner = data['_embedded']['owners']
+            if (this.owner && this.owner.length > 0) {              
+              car.ownerDniChar = car.ownerDni;              
+              console.log(`Owner with DNI '${car.ownerDni}' found`);
+            } else {
+              console.log(`Owner with DNI '${car.ownerDni}' not found.`);             
+              car.ownerDni = null;
+              car.ownerDniChar = "No Owner";
+              this.carService.save(car).subscribe(result => {this._snackBar.open(`Link with owner removed`, 'OK', {
+                duration: 5000,
+              }); }, error => console.error(error));
+            }
+          });
 
 ## car-edit
 
+A Select Option was added to allow linking a car with an owner easily, implementing `getOwners()`. The style of the buttons was also changed from raised to flat. 
+
+      <mat-form-field>
+        <mat-select placeholder="Select" [(ngModel)]="car.ownerDni" name="ownerDni" #ownerDni>
+            <mat-option>--</mat-option>
+          <mat-option *ngFor="let owner of owners" [value]="owner.dni">{{owner.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+>**.ts**
+
+    getOwners(){
+      this.ownerService.getAll().subscribe(owners => {
+        this.owners = owners['_embedded']['owners'];      
+      });
+    }
+
 ## owner-list
 
+Here are a few changes compared to Car-List component. A `SlideToogle` was added to bring the possibility to remove one or more owners at once. In addition, the delete selection button will only be available if at least one `CheckBox` is selected.
+
+>*SlideToogle*
+
+    <mat-slide-toggle class="margin" [color]="warn" [(ngModel)]="checked" (change)="changeSlideEvent($event)">
+        Slide to {{checked ? 'cancel selection' : 'select which ones to delete'}}
+    </mat-slide-toggle>
+    
+>*CheckBox*
+
+    <div><mat-checkbox [(ngModel)]="owner.check" *ngIf="checked" (change)="changeCheckBoxEvent($event)"></mat-checkbox></div>
+    
+>**.ts** 
+
+    removeSelected() {
+      this.owners.forEach(ownerAux => {
+        if(ownerAux.check) {  
+          ownerAux.check = false;
+          console.log("DODNI: "+ownerAux._links.self.href);
+          this.remove(ownerAux._links.self.href);
+        }
+      });
+      this._snackBar.open('Success: Owner(s) Deleted', 'OK', {
+        duration: 5000,
+      });
+    } 
+    
+    
+    changeSlideEvent() {
+      this.owners.forEach(owner => owner.check = false);
+      this.checkedBool= true;
+    } 
+
+    changeCheckBoxEvent() {
+      (this.owners.some(owner => owner.check) ? this.checkedBool= false : this.checkedBool= true); 
+    }
+
 ## owner-edit
+
+Very similar to Car-Edit Component.
 
 
 
