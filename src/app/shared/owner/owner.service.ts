@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +32,11 @@ export class OwnerService {
       result = this.http.put(owner.href, owner);
     } else {
       result = this.http.post(this.OWNER_API, owner);
-    }
+    }    
     return result;
   }
 
-  remove(href: string) {
+  remove(href: string) {    
     return this.http.delete(href);
   }
 }

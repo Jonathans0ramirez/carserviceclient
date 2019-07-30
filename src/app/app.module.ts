@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarListComponent } from './car-list/car-list.component';
 
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatToolbarModule, MatSelectModule, MatSlideToggleModule, MatGridListModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatToolbarModule, MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatGridListModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarEditComponent } from './car-edit/car-edit.component';
 import { FormsModule } from '@angular/forms';
@@ -36,6 +36,7 @@ import { OwnerListComponent } from './owner-list/owner-list.component';
     MatMenuModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     MatGridListModule,
     MatToolbarModule,
     FormsModule

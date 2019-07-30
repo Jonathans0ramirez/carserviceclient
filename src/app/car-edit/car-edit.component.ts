@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../shared/car/car.service';
@@ -18,6 +19,7 @@ export class CarEditComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
+              private _snackBar: MatSnackBar,
               private router: Router,
               private carService: CarService,
               private ownerService: OwnerService,
@@ -35,7 +37,9 @@ export class CarEditComponent implements OnInit, OnDestroy {
             this.car.href = car._links.self.href;
             this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
           } else {
-            console.log(`Car with id '${id}' not found, returning to list`);
+            this._snackBar.open(`Car with id '${id}' not found, returning to list`, 'OK', {
+              duration: 5000,
+            });
             this.gotoCarList();
           }
         });
@@ -59,14 +63,22 @@ export class CarEditComponent implements OnInit, OnDestroy {
 
   save(form: NgForm) {
     this.carService.save(form).subscribe(result => {
+      this._snackBar.open('Success: Car Saved', 'OK', {
+        duration: 5000,
+      });
       this.gotoCarList();
-    }, error => console.error(error));
+    }, error => console.error(error)
+    );
   }
 
   remove(href) {
     this.carService.remove(href).subscribe(result => {
+      this._snackBar.open('Success: Car Deleted', 'OK', {
+        duration: 5000,
+      });
       this.gotoCarList();
-    }, error => console.error(error));
+    }, error => console.error(error)
+    );
   }
 }
 

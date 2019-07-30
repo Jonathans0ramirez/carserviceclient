@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { OwnerService } from '../shared/owner/owner.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class OwnerListComponent implements OnInit {
   owners: Array<any>;
   checkedBool: boolean=true;
 
-  constructor(private ownerService: OwnerService) { }
+  constructor(private ownerService: OwnerService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.ownerService.getAll().subscribe(data => {
@@ -31,9 +32,12 @@ export class OwnerListComponent implements OnInit {
     this.owners.forEach(ownerAux => {
       if(ownerAux.check) {  
         ownerAux.check = false;
-        // console.log("DODNI: "+ownerAux._links.self.href);
+        console.log("DODNI: "+ownerAux._links.self.href);
         this.remove(ownerAux._links.self.href);
       }
+    });
+    this._snackBar.open('Success: Owner(s) Deleted', 'OK', {
+      duration: 5000,
     });
   } 
 

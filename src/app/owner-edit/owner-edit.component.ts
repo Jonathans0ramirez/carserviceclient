@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwnerService } from '../shared/owner/owner.service';
@@ -15,6 +16,7 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
+              private _snackBar: MatSnackBar,
               private router: Router,
               private ownerService: OwnerService) {
   }
@@ -29,7 +31,9 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
             this.owner = owner;            
             this.owner.href = owner._links.self.href;
           } else {
-            console.log(`Owner with href '${href}' not found, returning to owner list`);
+            this._snackBar.open(`Owner with href '${href}' not found, returning to owner list`, 'OK', {
+              duration: 5000,
+            });
             this.gotoOwnerList();
           }
         });
@@ -48,14 +52,10 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
 
   save(form: NgForm) {
     this.ownerService.save(form).subscribe(result => {
+      this._snackBar.open('Success: Owner Saved', 'OK', {
+        duration: 5000,
+      });
       this.gotoOwnerList();
     }, error => console.error(error));
   }
-
-  remove(href) {
-    this.ownerService.remove(href).subscribe(result => {
-      this.gotoOwnerList();
-    }, error => console.error(error));
-  }
-
 }
