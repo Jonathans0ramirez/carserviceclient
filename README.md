@@ -32,7 +32,8 @@ Components and services added or changed after fork.
 
 ## app-module
 
-Here was defined all the components what were used in the project from angular material. 
+Modules of Angular Material. 
+
 * MatCheckBoxModule
 * MatIconModule
 * MatMenuModule
@@ -85,7 +86,7 @@ A function was created to get the owner with a DNI parameter.
 
 ## car-list
 
-The way to list was changed from list to card. The edit and delete buttons were also changed. When this component init, a query is made with each car to verify if there is an car-owner relationship.
+The way to list was changed from list to card. The edit and delete buttons were also changed. When this component init, a query is made with each car to verify if there is an car-owner association.
 
           this.ownerService.getOwner(car.ownerDni).subscribe(data => {
             this.owner = data['_embedded']['owners']
